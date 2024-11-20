@@ -1,61 +1,32 @@
 import React from "react";
 import {
   Dialog,
+  DialogTrigger,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+  DialogClose,
+} from "@radix-ui/react-dialog";
 
 interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+  triggerText: string;
+  children: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
-  const promoCode = "BLACKFRIDAY24";
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(promoCode);
-    alert("Promo code copied to clipboard!");
-  };
-
+export const Modal: React.FC<ModalProps> = ({ triggerText, children }) => {
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent>
-        <DialogHeader>
-          <img
-            src="/images/black-friday.webp"
-            alt="Black Friday Promotion"
-            className="rounded-md"
-          />
-        </DialogHeader>
-        <DialogTitle>Exclusive Offer: 50% Off!</DialogTitle>
-        <DialogDescription>
-          Use the promo code below to enjoy 50% off on your next purchase.
-        </DialogDescription>
-        <div className="my-4">
-          <Button
-            variant="secondary"
-            className="w-full text-xl"
-            onClick={handleCopy}
-          >
-            {promoCode}
-          </Button>
-          <p className="text-sm text-muted-foreground mt-2 text-center">
-            Copy the code and use it during checkout.
-          </p>
-        </div>
-        <DialogFooter>
-          <Button variant={"secondary"} className="w-full" onClick={onClose}>
-            Continue Shopping
-          </Button>
-        </DialogFooter>
+    <Dialog>
+      <DialogTrigger asChild>
+        <button className="bg-blue-600 text-white py-2 px-4 rounded">
+          {triggerText}
+        </button>
+      </DialogTrigger>
+      <DialogContent className="bg-white rounded shadow-lg p-6">
+        {children}
+        <DialogClose asChild>
+          <button className="absolute top-2 right-2 text-gray-600">
+            Close
+          </button>
+        </DialogClose>
       </DialogContent>
     </Dialog>
   );
 };
-
-export default Modal;

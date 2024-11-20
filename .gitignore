@@ -396,3 +396,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Application Settings
+/backend/Caebra.API/appsettings.Development.json

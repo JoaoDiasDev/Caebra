@@ -1,17 +1,42 @@
-// pages/LandingPage.tsx
-import React from "react";
-import Hero from "../components/Hero";
-import Features from "../components/Features";
-import Testimonials from "../components/Testimonials";
+import HeroSection from '../components/HeroSection'
+import FeatureCard from '../components/FeatureCard'
+import { Mic, Type } from 'lucide-react'
+import { LucideIcon } from 'lucide-react'
 
-const LandingPage: React.FC = () => {
+interface Feature {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  color: string;
+  link: string;
+}
+
+const features: Feature[] = [
+  {
+    title: 'Text2Tone',
+    description: 'Convert your text into natural-sounding speech with customizable voices.',
+    icon: Type,
+    color: 'text-pink-400',
+    link: '/text2tone',
+  },
+  {
+    title: 'Tone2Text',
+    description: 'Transcribe and analyze audio with our advanced speech recognition technology.',
+    icon: Mic,
+    color: 'text-violet-400',
+    link: '/tone2text',
+  },
+]
+
+export default function LandingPage() {
   return (
-    <>
-      <Hero />
-      <Features />
-      <Testimonials />
-    </>
-  );
-};
-
-export default LandingPage;
+    <div className="space-y-16">
+      <HeroSection />
+      <section className="grid md:grid-cols-2 gap-8">
+        {features.map((feature) => (
+          <FeatureCard key={feature.title} {...feature} />
+        ))}
+      </section>
+    </div>
+  )
+}
