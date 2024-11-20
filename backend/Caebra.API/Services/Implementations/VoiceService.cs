@@ -145,7 +145,7 @@ public class VoiceService(IConfiguration configuration) : IVoiceService
             LanguageCode = voice.LanguageCode,
             LanguageName = voice.LanguageName,
             Gender = voice.Gender.ToString(),
-            SupportedEngines = null
+            SupportedEngines = voice.SupportedEngines
         }) ?? [];
     }
 
